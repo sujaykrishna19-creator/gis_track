@@ -27,19 +27,34 @@ export default function TeacherDashboard({ user, onLogout }) {
 
   const handleCreateTicket = async (e) => {
     e.preventDefault();
-    setSubmitting(true);
+    if (!taskDesc.trim()) return;
+
+    // Optimistic Update: Instantly show in UI
+    const tempTicket = {
+      id: "SENDING...",
+      date: new Date().toISOString(),
+      email: user.email,
+      task: taskDesc,
+      status: "Pending"
+    };
+    
+    setTickets([tempTicket, ...tickets]);
+    const originalTask = taskDesc;
+    setTaskDesc(''); // Clear form immediately
+    
+    // Run in background without freezing UI
     try {
-      const res = await apiCall({ action: 'createTicket', email: user.email, task: taskDesc });
+      const res = await apiCall({ action: 'createTicket', email: user.email, task: originalTask });
       if (res.success) {
-        setTaskDesc('');
-        fetchTickets(); // Refresh list
+        fetchTickets(); // Refresh to get the real Ticket ID
       } else {
         alert(res.error || 'Failed to create ticket');
+        fetchTickets(); // Revert on failure
       }
     } catch (err) {
       alert('Network error');
+      fetchTickets(); // Revert on failure
     }
-    setSubmitting(false);
   };
 
   const getStatusColor = (status) => {

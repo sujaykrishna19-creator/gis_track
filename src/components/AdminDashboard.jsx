@@ -31,7 +31,19 @@ export default function AdminDashboard({ user, onLogout }) {
   };
 
   const handleUpdate = async (ticketId) => {
-    setSaving(true);
+    // Optimistic Update: Update UI instantly
+    const originalTickets = [...tickets];
+    
+    setTickets(tickets.map(t => {
+      if (t.id === ticketId) {
+        return { ...t, status: editStatus, comment: editComment };
+      }
+      return t;
+    }));
+    
+    setEditingId(null); // Close the edit box instantly
+    
+    // Run in background without freezing UI
     try {
       const res = await apiCall({ 
         action: 'updateTicket', 
@@ -39,16 +51,14 @@ export default function AdminDashboard({ user, onLogout }) {
         status: editStatus,
         comment: editComment
       });
-      if (res.success) {
-        setEditingId(null);
-        fetchTickets(); // refresh
-      } else {
+      if (!res.success) {
         alert(res.error || 'Failed to update');
+        setTickets(originalTickets); // Revert on failure
       }
     } catch (err) {
       alert('Network error');
+      setTickets(originalTickets); // Revert on failure
     }
-    setSaving(false);
   };
 
   const getStatusColor = (status) => {
