@@ -138,7 +138,7 @@ export default function AdminDashboard({ user, onLogout }) {
                     <tr className="hover:bg-gray-50 transition-colors">
                       <td className="p-4 align-top">
                         <div className="font-medium text-gray-800">{t.id}</div>
-                        <div className="text-xs text-gray-400 mt-1">{new Date(t.date).toLocaleDateString()}</div>
+                        <div className="text-xs text-gray-400 mt-1">{new Date(t.date).toString() === 'Invalid Date' ? t.date : new Date(t.date).toLocaleDateString()}</div>
                       </td>
                       <td className="p-4 align-top text-sm text-gray-600">{t.email}</td>
                       <td className="p-4 align-top text-sm text-gray-800 max-w-md">
