@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiCall } from '../lib/api';
+import { formatDate } from '../lib/utils';
 import { LogOut, Plus, Clock, CheckCircle } from 'lucide-react';
 
 export default function TeacherDashboard({ user, onLogout }) {
@@ -118,7 +119,7 @@ export default function TeacherDashboard({ user, onLogout }) {
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <span className="text-xs font-bold text-gray-400 uppercase">{t.id}</span>
-                    <span className="text-xs text-gray-400 ml-3">{new Date(t.date).toString() === 'Invalid Date' ? t.date : new Date(t.date).toLocaleDateString()}</span>
+                    <span className="text-xs text-gray-400 ml-3">{formatDate(t.date)}</span>
                   </div>
                   <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${getStatusColor(t.status)}`}>
                     {t.status}

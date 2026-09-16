@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiCall } from '../lib/api';
+import { formatDate } from '../lib/utils';
 import { LogOut, Filter, MessageSquare, Check } from 'lucide-react';
 
 export default function AdminDashboard({ user, onLogout }) {
@@ -148,7 +149,7 @@ export default function AdminDashboard({ user, onLogout }) {
                     <tr className="hover:bg-gray-50 transition-colors">
                       <td className="p-4 align-top">
                         <div className="font-medium text-gray-800">{t.id}</div>
-                        <div className="text-xs text-gray-400 mt-1">{new Date(t.date).toString() === 'Invalid Date' ? t.date : new Date(t.date).toLocaleDateString()}</div>
+                        <div className="text-xs text-gray-400 mt-1">{formatDate(t.date)}</div>
                       </td>
                       <td className="p-4 align-top text-sm text-gray-600">{t.email}</td>
                       <td className="p-4 align-top text-sm text-gray-800 max-w-md">
