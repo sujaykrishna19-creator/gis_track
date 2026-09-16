@@ -53,7 +53,7 @@ export default function AdminDashboard({ user, onLogout }) {
 
   const getStatusColor = (status) => {
     if (status === 'Pending') return 'text-yellow-600 bg-yellow-100';
-    if (status === 'Work in Progress') return 'text-blue-600 bg-blue-100';
+    if (status === 'Work in Progress') return 'text-brand bg-sky-100';
     if (status === 'Completed') return 'text-green-600 bg-green-100';
     return 'text-gray-600 bg-gray-100';
   };
@@ -69,12 +69,12 @@ export default function AdminDashboard({ user, onLogout }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm px-6 py-4 flex justify-between items-center border-b-4 border-blue-600">
+      <nav className="bg-white shadow-sm px-6 py-4 flex justify-between items-center border-b-4 border-brand">
         <h1 className="text-xl font-bold text-gray-800">Admin Control Panel</h1>
         <div className="flex items-center gap-4">
-          <span className="text-sm font-semibold text-blue-600 px-3 py-1 bg-blue-50 rounded-full">Admin</span>
+          <span className="text-sm font-semibold text-brand px-3 py-1 bg-sky-50 rounded-full">Admin</span>
           <span className="text-sm text-gray-600">{user.email}</span>
-          <button onClick={onLogout} className="text-gray-500 hover:text-red-500 flex items-center gap-1 text-sm font-medium">
+          <button onClick={onLogout} className="bg-red-50 text-red-500 px-3 py-1.5 rounded hover:bg-red-100 flex items-center gap-1 text-sm font-medium transition-colors">
             <LogOut size={16} /> Logout
           </button>
         </div>
@@ -93,7 +93,7 @@ export default function AdminDashboard({ user, onLogout }) {
             <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold mt-1">Pending</div>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 text-center">
-            <div className="text-3xl font-bold text-blue-500">{stats.wip}</div>
+            <div className="text-3xl font-bold text-brand">{stats.wip}</div>
             <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold mt-1">In Progress</div>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 text-center">
@@ -108,7 +108,7 @@ export default function AdminDashboard({ user, onLogout }) {
           <select 
             value={filter} 
             onChange={(e) => setFilter(e.target.value)}
-            className="p-2 border rounded text-sm bg-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="p-2 border rounded text-sm bg-white focus:outline-none focus:ring-1 focus:ring-brand"
           >
             <option value="All">All Requests</option>
             <option value="Pending">Pending</option>
@@ -169,7 +169,7 @@ export default function AdminDashboard({ user, onLogout }) {
                               setEditStatus(t.status);
                               setEditComment(t.comment || '');
                             }}
-                            className="text-blue-500 text-sm font-medium hover:underline"
+                            className="text-brand text-sm font-medium hover:underline"
                           >
                             Update
                           </button>
@@ -179,7 +179,7 @@ export default function AdminDashboard({ user, onLogout }) {
                     
                     {/* Inline Edit Form */}
                     {editingId === t.id && (
-                      <tr className="bg-blue-50 border-b">
+                      <tr className="bg-sky-50 border-b">
                         <td colSpan="5" className="p-4">
                           <div className="flex gap-4 items-start">
                             <div className="w-48">
@@ -187,7 +187,7 @@ export default function AdminDashboard({ user, onLogout }) {
                               <select 
                                 value={editStatus} 
                                 onChange={(e) => setEditStatus(e.target.value)}
-                                className="w-full p-2 border rounded text-sm focus:outline-none focus:border-blue-500"
+                                className="w-full p-2 border rounded text-sm focus:outline-none focus:border-brand"
                               >
                                 <option value="Pending">Pending</option>
                                 <option value="Work in Progress">Work in Progress</option>
@@ -200,7 +200,7 @@ export default function AdminDashboard({ user, onLogout }) {
                                 type="text"
                                 value={editComment}
                                 onChange={(e) => setEditComment(e.target.value)}
-                                className="w-full p-2 border rounded text-sm focus:outline-none focus:border-blue-500"
+                                className="w-full p-2 border rounded text-sm focus:outline-none focus:border-brand"
                                 placeholder="E.g., I'll be there after 3 PM today."
                               />
                             </div>
@@ -208,7 +208,7 @@ export default function AdminDashboard({ user, onLogout }) {
                               <button 
                                 onClick={() => handleUpdate(t.id)}
                                 disabled={saving}
-                                className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700 flex items-center gap-1 disabled:opacity-50"
+                                className="bg-brand text-white px-4 py-2 rounded text-sm font-medium hover:bg-brand-dark flex items-center gap-1 disabled:opacity-50"
                               >
                                 {saving ? 'Saving...' : <><Check size={16} /> Save Changes</>}
                               </button>

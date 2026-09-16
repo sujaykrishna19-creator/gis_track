@@ -44,7 +44,7 @@ export default function TeacherDashboard({ user, onLogout }) {
 
   const getStatusColor = (status) => {
     if (status === 'Pending') return 'text-yellow-600 bg-yellow-100';
-    if (status === 'Work in Progress') return 'text-blue-600 bg-blue-100';
+    if (status === 'Work in Progress') return 'text-brand bg-blue-50';
     if (status === 'Completed') return 'text-green-600 bg-green-100';
     return 'text-gray-600 bg-gray-100';
   };
@@ -55,7 +55,7 @@ export default function TeacherDashboard({ user, onLogout }) {
         <h1 className="text-xl font-bold text-gray-800">My Tasks</h1>
         <div className="flex items-center gap-4">
           <span className="text-sm text-gray-600">{user.email}</span>
-          <button onClick={onLogout} className="text-gray-500 hover:text-red-500 flex items-center gap-1 text-sm font-medium">
+          <button onClick={onLogout} className="bg-red-50 text-red-500 px-3 py-1.5 rounded hover:bg-red-100 flex items-center gap-1 text-sm font-medium transition-colors">
             <LogOut size={16} /> Logout
           </button>
         </div>
@@ -65,20 +65,20 @@ export default function TeacherDashboard({ user, onLogout }) {
         {/* Create Ticket Form */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8 border border-gray-100">
           <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-            <Plus size={20} className="text-blue-500" /> New Request
+            <Plus size={20} className="text-brand" /> New Request
           </h2>
           <form onSubmit={handleCreateTicket}>
             <textarea 
               value={taskDesc}
               onChange={(e) => setTaskDesc(e.target.value)}
               placeholder="E.g., Please move the extra chairs from Room 101 to the storage closet."
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[100px] mb-4"
+              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand min-h-[100px] mb-4"
               required
             ></textarea>
             <button 
               type="submit" 
               disabled={submitting}
-              className="bg-blue-500 text-white font-medium py-2 px-6 rounded-md hover:bg-blue-600 disabled:opacity-50"
+              className="bg-brand text-white font-medium py-2 px-6 rounded-md hover:bg-brand-dark disabled:opacity-50"
             >
               {submitting ? 'Submitting...' : 'Submit Request'}
             </button>
@@ -111,7 +111,7 @@ export default function TeacherDashboard({ user, onLogout }) {
                 </div>
                 <p className="text-gray-800 mt-2">{t.task}</p>
                 {t.comment && (
-                  <div className="mt-4 p-3 bg-gray-50 rounded text-sm text-gray-700 border-l-4 border-blue-400">
+                  <div className="mt-4 p-3 bg-gray-50 rounded text-sm text-gray-700 border-l-4 border-brand">
                     <strong>Admin Note:</strong> {t.comment}
                   </div>
                 )}
