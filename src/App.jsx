@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import TeacherDashboard from './components/TeacherDashboard';
 import AdminDashboard from './components/AdminDashboard';
@@ -36,7 +36,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route 
           path="/" 
@@ -65,7 +65,7 @@ function App() {
           } 
         />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
